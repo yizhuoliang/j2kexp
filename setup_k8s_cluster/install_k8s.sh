@@ -1,3 +1,7 @@
+# Update and upgrade the system
+sudo apt update
+sudo apt upgrade -y
+
 # Install Docker
 sudo apt install -y docker.io
 
@@ -22,10 +26,6 @@ sudo systemctl enable docker
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-# Update and upgrade the system
-sudo apt update
-sudo apt upgrade -y
-
 # Install dependencies for Kubernetes
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
@@ -40,14 +40,3 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
-
-# Initialize the Kubernetes cluster
-sudo kubeadm init
-
-# To start using your cluster, you need to run the following as a regular user
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-# Apply Flannel CNI
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
