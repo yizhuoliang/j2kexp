@@ -20,7 +20,7 @@ def create_pv():
                                 client.V1NodeSelectorRequirement(
                                     key="kubernetes.io/hostname",
                                     operator="In",
-                                    values=["your-node-name"]
+                                    values=["node0.net-test.rdma-prefetch-pg0.wisc.cloudlab.us"]
                                 )
                             ]
                         )
