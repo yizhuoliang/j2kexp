@@ -63,9 +63,22 @@ def create_deployment():
     )
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={"app": "example"}),
-        spec=client.V1PodSpec(containers=[container], volumes=[
-            client.V1Volume(name="storage", persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(claim_name="example-pvc"))
-        ])
+        spec=client.V1PodSpec(
+            containers=[container], 
+            volumes=[
+                client.V1Volume(
+                    name="storage", 
+                    persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(claim_name="example-pvc")
+                )
+            ],
+            tolerations=[  # Add this tolerations section
+                client.V1Toleration(
+                    key="node-role.kubernetes.io/control-plane",
+                    operator="Exists",
+                    effect="NoSchedule"
+                )
+            ]
+        )
     )
     spec = client.V1DeploymentSpec(
         replicas=1,
