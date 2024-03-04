@@ -141,7 +141,7 @@ def deploy_resultsHub_to_statefulset(pvc_name, namespace):
 
 if __name__ == "__main__":
     # CREATE PV
-    node_name = "your-node-name" # Replace with your node's name
+    node_name = "node0.net-test.rdma-prefetch-pg0.wisc.cloudlab.us" # Replace with your node's name
     local_path = "/data/my-pv" # Replace with your directory path
     pv_name = "local-pv"
     storage_size = "1Gi" # Adjust the size as needed
