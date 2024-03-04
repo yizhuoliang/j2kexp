@@ -151,7 +151,7 @@ if __name__ == "__main__":
     create_local_pv(node_name, local_path, pv_name, storage_size)
 
     # CREATE PVC
-    create_pvc(pv_name, storage_size, namespace)
+    create_pvc(pvc_name, storage_size, namespace)
 
     # DEPLOY RESULTSHUB
     deploy_resultsHub_to_statefulset(pvc_name, namespace)
