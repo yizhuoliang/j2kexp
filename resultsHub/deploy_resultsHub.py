@@ -101,6 +101,13 @@ def deploy_resultsHub_to_statefulset(pvc_name, namespace):
                             name="storage",
                             persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(claim_name=pvc_name)
                         )
+                    ],
+                    tolerations=[  # Add this tolerations section
+                        client.V1Toleration(
+                            key="node-role.kubernetes.io/control-plane",
+                            operator="Exists",
+                            effect="NoSchedule"
+                        )
                     ]
                 )
             )
