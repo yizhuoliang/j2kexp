@@ -88,7 +88,13 @@ def deploy_resultsHub_to_statefulset(pvc_name, namespace):
             service_name="results-hub",
             replicas=1,  # Ensure only 1 pod is created
             template=client.V1PodTemplateSpec(
-                metadata=client.V1ObjectMeta(labels={"app": "results-hub"}),
+                metadata=client.V1ObjectMeta(
+                    labels={"app": "results-hub"},
+                    # disable AppArmor
+                    annotations={
+                        "container.apparmor.security.beta.kubernetes.io/results-hub": "unconfined"
+                    }
+                ),
                 spec=client.V1PodSpec(
                     containers=[client.V1Container(
                         name="results-hub",
