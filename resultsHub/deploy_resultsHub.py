@@ -1,4 +1,5 @@
 from kubernetes import client, config
+from kubernetes.client.rest import ApiException
 
 def create_local_pv(node_name, local_path, pv_name, storage_size):
     # Define the PV
