@@ -10,7 +10,6 @@ def create_pv():
             volume_mode="Filesystem",
             access_modes=["ReadWriteOnce"],
             persistent_volume_reclaim_policy="Retain",
-            storage_class_name="manual",
             local=client.V1LocalVolumeSource(path="/data/my-pv"),
             node_affinity=client.V1VolumeNodeAffinity(
                 required=client.V1NodeSelector(
@@ -38,7 +37,6 @@ def create_pvc():
         metadata=client.V1ObjectMeta(name="example-pvc"),
         spec=client.V1PersistentVolumeClaimSpec(
             access_modes=["ReadWriteOnce"],
-            storage_class_name="manual",
             resources=client.V1ResourceRequirements(
                 requests={"storage": "1Gi"}
             )
