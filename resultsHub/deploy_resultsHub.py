@@ -137,7 +137,7 @@ def deploy_resultsHub_to_statefulset(pvc_name, namespace):
         ),
         spec=client.V1ServiceSpec(
             selector={"app": "results-hub"},
-            ports=[client.V1ServicePort(port=50051, target_port=50051)],
+            ports=[client.V1ServicePort(port=30051, target_port=50051, node_port=30051)],
             type="NodePort"
         )
     )
@@ -154,12 +154,12 @@ def deploy_resultsHub_to_statefulset(pvc_name, namespace):
 
 if __name__ == "__main__":
     # CREATE PV
-    node_name = "node0.net-test.rdma-prefetch-pg0.wisc.cloudlab.us" # Replace with your node's name
-    local_path = "/data/my-pv" # Replace with your directory path
+    node_name = "node0.net-test.rdma-prefetch-pg0.wisc.cloudlab.us" # NOTE: REPLACE NODE_NAME EVERYTIME CHANGE THE MACHINE!
+    local_path = "/data/my-pv" 
     pv_name = "local-pv"
     storage_size = "1Gi" # Adjust the size as needed
     pvc_name = "local-pvc-for-rh"
-    namespace = "default" # for ResultsHub
+    namespace = "default" # for ResultsHub and jobs
 
     create_local_pv(node_name, local_path, pv_name, storage_size)
 
